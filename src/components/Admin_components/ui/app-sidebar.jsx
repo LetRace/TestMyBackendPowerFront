@@ -14,11 +14,11 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   useSidebar,
-} from "../ui/sidebar"
+} from "./Sidebar"
 import { Link, useNavigate } from "react-router-dom";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./Dropdown-menu";
 import { AlertCircle, BarChart2, ChevronDown, ChevronRight, ChevronUp, CreditCard, FileText, LayoutDashboard, User, User2 } from "lucide-react";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./collapsible";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./Collapsible";
 import { Button } from "@/components/Admin_components/ui/Button";
 
 

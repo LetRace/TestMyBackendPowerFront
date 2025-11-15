@@ -1,4 +1,4 @@
-import { Button } from "@/components/Admin_components/ui/button"
+import { Button } from "@/components/Admin_components/ui/Button"
 
 
 const AdminDashboard = () => {

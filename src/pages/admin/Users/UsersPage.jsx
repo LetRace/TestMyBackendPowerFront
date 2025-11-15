@@ -14,7 +14,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/Admin_components/ui/select"
+} from "@/components/Admin_components/ui/Select"
 
 import { getRoleColor, getRoleDisplayName, getStatusColor, getStatusDisplayName } from '@/lib/utils';
 import { api } from '@/services/api';

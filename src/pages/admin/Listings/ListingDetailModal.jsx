@@ -9,9 +9,9 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '@/components/Admin_components/ui/dialog';
-import { Button } from '@/components/Admin_components/ui/button';
-import { Badge } from '@/components/Admin_components/ui/badge';
+} from '@/components/Admin_components/ui/Dialog';
+import { Button } from '@/components/Admin_components/ui/Button';
+import { Badge } from '@/components/Admin_components/ui/Badge';
 import { getStatusColor, getStatusDisplayName, formatCurrency } from '@/lib/utils';
 
 const ListingDetailModal = ({ isOpen, onClose, listing, onImageDeleted }) => {

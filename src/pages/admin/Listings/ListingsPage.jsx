@@ -3,10 +3,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Search, Package, Plus, Edit, Eye, Trash2, CheckCircle } from 'lucide-react';
 import { toast } from 'sonner';
 
-import { Card, CardContent, CardHeader } from '@/components/Admin_components/ui/card';
-import { Input } from '@/components/Admin_components/ui/input';
-import { Button } from '@/components/Admin_components/ui/button';
-import { Badge } from '@/components/Admin_components/ui/badge';
+import { Card, CardContent, CardHeader } from '@/components/Admin_components/ui/Card';
+import { Input } from '@/components/Admin_components/ui/Input';
+import { Button } from '@/components/Admin_components/ui/Button';
+import { Badge } from '@/components/Admin_components/ui/Badge';
 import {
   Table,
   TableBody,
@@ -14,14 +14,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/Admin_components/ui/table';
+} from '@/components/Admin_components/ui/Table';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/Admin_components/ui/select';
+} from '@/components/Admin_components/ui/Select';
 import { Loading } from '@/components/Admin_components/Loading';
 import { EmptyState } from '@/components/Admin_components/EmptyState';
 import { getStatusColor, getStatusDisplayName, formatCurrency } from '@/lib/utils';

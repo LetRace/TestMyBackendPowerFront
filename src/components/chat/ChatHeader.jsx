@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Trash2 } from "lucide-react";
 import ChatAvatar from "./ChatAvatar";
-import { Button } from "@/components/Admin_components/ui/button";
+import { Button } from "@/components/Admin_components/ui/Button";
 import {
     AlertDialog,
     AlertDialogTrigger,

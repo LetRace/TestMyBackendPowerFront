@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { api } from "@/services/api";
-import { Button } from "@/components/Admin_components/ui/button";
+import { Button } from "@/components/Admin_components/ui/Button";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -18,17 +18,17 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-} from "@/components/Admin_components/ui/dialog";
+} from "@/components/Admin_components/ui/Dialog";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/Admin_components/ui/select";
-import { Input } from "@/components/Admin_components/ui/input";
-import { Label } from "@/components/Admin_components/ui/label";
-import { Textarea } from "@/components/Admin_components/ui/textarea";
+} from "@/components/Admin_components/ui/Select";
+import { Input } from "@/components/Admin_components/ui/Input";
+import { Label } from "@/components/Admin_components/ui/Label";
+import { Textarea } from "@/components/Admin_components/ui/Textarea";
 import { toast } from "sonner";
 
 const statusOptions = [

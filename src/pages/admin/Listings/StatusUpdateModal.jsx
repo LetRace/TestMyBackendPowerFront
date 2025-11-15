@@ -7,17 +7,17 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '@/components/Admin_components/ui/dialog';
-import { Button } from '@/components/Admin_components/ui/button';
-import { Label } from '@/components/Admin_components/ui/label';
+} from '@/components/Admin_components/ui/Dialog';
+import { Button } from '@/components/Admin_components/ui/Button';
+import { Label } from '@/components/Admin_components/ui/Label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/Admin_components/ui/select';
-import { Badge } from '@/components/Admin_components/ui/badge';
+} from '@/components/Admin_components/ui/Select';
+import { Badge } from '@/components/Admin_components/ui/Badge';
 import { getStatusColor, getStatusDisplayName } from '@/lib/utils';
 
 const StatusUpdateModal = ({ isOpen, onClose, listing, onUpdateStatus }) => {

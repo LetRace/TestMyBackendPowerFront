@@ -7,17 +7,17 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/Admin_components/ui/dialog"
+} from "@/components/Admin_components/ui/Dialog"
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/Admin_components/ui/select"
-import { Button } from "@/components/Admin_components/ui/button"
-import { Input } from "@/components/Admin_components/ui/input"
-import { Label } from "@/components/Admin_components/ui/label"
+} from "@/components/Admin_components/ui/Select"
+import { Button } from "@/components/Admin_components/ui/Button"
+import { Input } from "@/components/Admin_components/ui/Input"
+import { Label } from "@/components/Admin_components/ui/Label"
 import { Pencil } from "lucide-react"
 import { api } from "@/services/api"
 import { toast } from "sonner"

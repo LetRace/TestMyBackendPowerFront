@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/Admin_components/ui/card';
-import { Badge } from '@/components/Admin_components/ui/badge';
-import { Alert, AlertDescription } from '@/components/Admin_components/ui/alert';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/Admin_components/ui/Card';
+import { Badge } from '@/components/Admin_components/ui/Badge';
+import { Alert, AlertDescription } from '@/components/Admin_components/ui/Alert';
 import { Mail, Phone, MessageSquare, Calendar, Package } from 'lucide-react';
 import { api } from '@/services/api';
 import { Link } from 'react-router-dom';

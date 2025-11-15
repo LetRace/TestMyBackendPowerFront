@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import { AppSidebar } from "../ui/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "../ui/sidebar";
+import { AppSidebar } from "../ui/App-sidebar";
+import { SidebarProvider, SidebarTrigger } from "../ui/Sidebar";
 import React from "react";
 
 

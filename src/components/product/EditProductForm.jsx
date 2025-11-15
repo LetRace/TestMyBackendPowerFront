@@ -1,15 +1,15 @@
 import { Save, X, Loader2 } from 'lucide-react';
-import { Button } from '@/components/Admin_components/ui/button';
-import { Input } from '@/components/Admin_components/ui/input';
-import { Label } from '@/components/Admin_components/ui/label';
-import { Textarea } from '@/components/Admin_components/ui/textarea';
+import { Button } from '@/components/Admin_components/ui/Button';
+import { Input } from '@/components/Admin_components/ui/Input';
+import { Label } from '@/components/Admin_components/ui/Label';
+import { Textarea } from '@/components/Admin_components/ui/Textarea';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/Admin_components/ui/select';
+} from '@/components/Admin_components/ui/Select';
 
 function EditProductForm({
   product,

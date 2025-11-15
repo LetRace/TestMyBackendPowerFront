@@ -20,7 +20,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/Admin_components/ui/dialog"
+} from "@/components/Admin_components/ui/Dialog"
 
 const ReportsPage = () => {
   const [reports, setReports] = useState([]);
