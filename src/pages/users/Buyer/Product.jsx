@@ -28,7 +28,7 @@ function Product() {
     useEffect(() => {
         const fetchUserId = async () => {
             try {
-                const res = await api.get("http://localhost:3000/api/v1/users/verify-token", {
+                const res = await api.get("/users/verify-token", {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                         "Content-Type": "application/json",

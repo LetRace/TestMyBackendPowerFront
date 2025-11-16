@@ -169,17 +169,17 @@ const ListingsPage = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       // ✅ Debug: ตรวจสอบโครงสร้างข้อมูล
       console.log('Listing detail response:', response.data);
-      
+
       const listingData = response.data?.listing || response.data;
-      
+
       // ✅ Fix: ตรวจสอบว่า images มีข้อมูลหรือไม่
       if (!listingData.images || listingData.images.length === 0) {
         console.warn('No images found in listing');
       }
-      
+
       setSelectedListing(listingData);
       setShowDetailModal(true);
     } catch (error) {
@@ -196,10 +196,10 @@ const ListingsPage = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       const listingData = response.data?.listing || response.data;
       setSelectedListing(listingData);
-      
+
       // Also refresh the listings table
       fetchListings(pagination.page);
     } catch (error) {
@@ -263,15 +263,21 @@ const ListingsPage = () => {
   // Update Status
   const handleUpdateStatus = async (listingId, status, rejectionReason = null) => {
     try {
-      await api.put(
+      console.log(listingId, status);
+      
+      await api.patch(
         `/listings/${listingId}/status`,
-        { status, rejection_reason: rejectionReason },
+        {
+          status,
+          rejection_reason: rejectionReason
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
+
       toast.success('อัพเดทสถานะสำเร็จ');
       setShowStatusModal(false);
       setSelectedListing(null);

@@ -1,7 +1,23 @@
 // components/navbar/NavbarLinks.jsx
+import { useCallback } from "react";
 import { Link } from "react-router-dom";
 
+
+
 function NavbarLinks({ role }) {
+
+    const getUserData = useCallback(() => {
+        try {
+            const userData = JSON.parse(localStorage.getItem("userData"));
+            return userData?.user_id;
+        } catch (e) {
+            console.error("Cannot parse userData:", e);
+            return null;
+        }
+    }, []);
+
+    const currentUserId = getUserData();
+
     if (role === "seller") {
         return (
             <div className="hidden md:flex items-center gap-1">
@@ -12,7 +28,7 @@ function NavbarLinks({ role }) {
                     ลงขาย
                 </Link>
                 <Link
-                    to="/shop/3"
+                    to={`/shop/${currentUserId}`}
                     className="px-4 py-2 border rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 font-medium"
                 >
                     หน้าร้านค้า

@@ -116,12 +116,18 @@ function App() {
               </Provider>
             }
           />
-          <Route
+          {/* <Route
             path="/admin/*"
             element={
               <ProtectedRoute>
                 <AdminLayout />
               </ProtectedRoute>
+            }
+          > */}
+          <Route
+            path="/admin/*"
+            element={
+              <AdminLayout />
             }
           >
             <Route

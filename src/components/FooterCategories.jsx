@@ -82,6 +82,7 @@ function FooterCategories({
         <div className="max-w-7xl mx-auto px-6 py-6 text-xs text-gray-500 flex flex-wrap items-center gap-3 justify-between">
           <p>© {currentYear} TrustTrade – Marketplace</p>
           <div className="flex items-center gap-3">
+            <span>ติดต่อแอดมินผ่าน facebook</span>
             <span>นโยบายความเป็นส่วนตัว</span>
             <span>เงื่อนไขการใช้งาน</span>
           </div>

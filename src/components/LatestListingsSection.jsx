@@ -16,21 +16,20 @@ function ListingCard({ listing, index, onClick }) {
           alt={listing.name}
           className="w-full h-full object-cover"
         />
-        
+
         {/* Badge (NEW/SALE etc.) */}
         {listing.badge && (
           <span
-            className={`absolute top-2 left-2 text-[11px] px-2 py-0.5 rounded-full text-white ${
-              listing.badge === "NEW" ? "bg-rose-500" : "bg-orange-500"
-            }`}
+            className={`absolute top-2 left-2 text-[11px] px-2 py-0.5 rounded-full text-white ${listing.badge === "NEW" ? "bg-rose-500" : "bg-orange-500"
+              }`}
           >
             {listing.badge}
           </span>
         )}
-        
+
         {/* Price Tag */}
         <div className="absolute bottom-2 left-2 bg-white/95 px-2 py-0.5 rounded text-sm font-semibold">
-          ฿ {Number(listing.price).toLocaleString()}
+          ฿ {Math.floor(listing.price).toLocaleString()}
         </div>
       </div>
 
@@ -67,9 +66,6 @@ function LoadingSkeleton({ count = 4 }) {
  */
 function LatestListingsSection({ listings, isLoading, error }) {
   const navigate = useNavigate();
-
-  console.log(listings);
-  
 
   const handleViewAllClick = () => {
     navigate("/marketplace");

@@ -17,7 +17,7 @@ export default function useAuthCheck() {
 
             try {
                 const res = await axios.get(
-                    "http://localhost:3000/api/v1/users/verify-token",
+                    "/users/verify-token",
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
