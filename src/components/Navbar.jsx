@@ -1,0 +1,89 @@
+// components/Navbar.jsx (Refactored)
+import { useState } from "react";
+import { useChat } from "@/hooks/useChat";
+import ChatModal from "./chat/ChatModal";
+import NavbarLogo from "./Navbar/NavbarLogo";
+import NavbarLinks from "./Navbar/NavbarLinks";
+import NavbarActions from "./Navbar/NavbarActions";
+import MobileDrawer from "./Navbar/MobileDrawer";
+
+function Navbar({ role, handleAuthButtonClick }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const {
+    showChat,
+    setShowChat,
+    conversations,
+    selectedConversation,
+    messages,
+    input,
+    setInput,
+    unreadCount,
+    loading,
+    currentUserId,
+    handleChatClick,
+    handleConversationSelect,
+    sendMessage,
+  } = useChat(role);
+
+  const token = localStorage.getItem('token')
+
+  return (
+    <>
+      <nav className="bg-white sticky top-0 z-40 border-b border-gray-200">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Left: Logo */}
+            <NavbarLogo />
+
+            {/* Center: Navigation Links (Desktop) */}
+            <NavbarLinks role={role} />
+
+            {/* Right: Actions */}
+            <NavbarActions
+              role={role}
+              unreadCount={unreadCount}
+              menuOpen={menuOpen}
+              onChatClick={handleChatClick}
+              onMenuToggle={() => setMenuOpen(!menuOpen)}
+            />
+
+            {token ? null : (
+              <button
+                onClick={handleAuthButtonClick}
+                className="bg-white text-blue-700 px-6 py-2 rounded-full shadow hover:scale-110 hover:shadow-xl transition text-sm font-semibold"
+              >
+                Signup / Login
+              </button>
+
+            )}
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Drawer */}
+      <MobileDrawer
+        role={role}
+        menuOpen={menuOpen}
+        onClose={() => setMenuOpen(false)}
+      />
+
+      {/* Chat Modal */}
+      <ChatModal
+        isOpen={showChat}
+        conversations={conversations}
+        selectedConversation={selectedConversation}
+        messages={messages}
+        input={input}
+        loading={loading}
+        currentUserId={currentUserId}
+        onClose={() => setShowChat(false)}
+        onSelectConversation={handleConversationSelect}
+        onInputChange={setInput}
+        onSendMessage={sendMessage}
+      />
+    </>
+  );
+}
+
+export default Navbar;
