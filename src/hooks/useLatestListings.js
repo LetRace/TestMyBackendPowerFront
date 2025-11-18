@@ -45,7 +45,7 @@ export function useLatestListings(limit = 4) {
         const response = await api.get("/listings", {
           params: { 
             sort: "newest", 
-            limit: limit,
+            limit: limit ,
             status: "active"
           },
         });

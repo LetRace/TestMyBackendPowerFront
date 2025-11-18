@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Star, Search, X, MessageSquare, Flag, ShieldAlert } from 'lucide-react';
 import { toast } from 'sonner';
-import { Card, CardContent } from '@/components/Admin_components/ui/Card';
-import { Button } from '@/components/Admin_components/ui/Button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/Admin_components/ui/Table';
+import { Card, CardContent } from '@/components/Admin_components/ui/card';
+import { Button } from '@/components/Admin_components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/Admin_components/ui/table';
 import { EmptyState } from '@/components/Admin_components/EmptyState';
 import { api } from '@/services/api';
 
@@ -139,9 +139,9 @@ const ReviewsPage = () => {
 
     try {
       setLoading(true);
-      
+
       console.log('🔍 Searching for listing ID:', id);
-      
+
       // เปลี่ยน API endpoint
       const response = await api.get(`/reviews/listing/${id}`, {
         headers: {
@@ -155,11 +155,11 @@ const ReviewsPage = () => {
       if (response.data.success) {
         const reviewsData = response.data.data || [];
         console.log('📊 Reviews found:', reviewsData.length);
-        
+
         setReviews(reviewsData);
         setStatistics(null); // API ใหม่ไม่มี statistics
         setListingId(id);
-        
+
         if (reviewsData.length === 0) {
           toast.info(`ไม่พบรีวิวสำหรับสินค้า ID: ${id}`);
         } else {
@@ -177,7 +177,7 @@ const ReviewsPage = () => {
         status: error.response?.status,
         url: error.config?.url
       });
-      
+
       if (error.response?.status === 404) {
         toast.error(`ไม่พบสินค้า ID: ${id}`);
       } else if (error.response?.status === 401) {
@@ -207,7 +207,7 @@ const ReviewsPage = () => {
   const handleToggleSpam = async (reviewId, currentSpamStatus) => {
     const newSpamStatus = !currentSpamStatus;
     const action = newSpamStatus ? 'ทำเครื่องหมายเป็นสแปม' : 'ยกเลิกการทำเครื่องหมายสแปม';
-    
+
     if (!confirm(`คุณแน่ใจหรือไม่ที่จะ${action}?`)) return;
 
     try {
@@ -319,7 +319,7 @@ const ReviewsPage = () => {
 
       {/* Statistics */}
       {statistics && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <Card>
             <CardContent className="pt-6">
               <div className="text-center">
@@ -333,6 +333,14 @@ const ReviewsPage = () => {
               <div className="text-center">
                 <p className="text-sm text-gray-500">คะแนนเฉลี่ย</p>
                 <p className="text-3xl font-bold text-yellow-500">{statistics.averageRating?.toFixed(2) || 0}</p>
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-6">
+              <div className="text-center">
+                <p className="text-sm text-gray-500">รีวิวที่เป็นสแปม</p>
+                <p className="text-3xl font-bold text-red-600">{statistics.spamReviews}</p>
               </div>
             </CardContent>
           </Card>
@@ -436,7 +444,7 @@ const ReviewsPage = () => {
                           </div>
                         </div>
                       </TableCell>
-                      
+
                       {isFullData && (
                         <TableCell>
                           <div className="flex items-center gap-2">
@@ -461,7 +469,7 @@ const ReviewsPage = () => {
                           </div>
                         </TableCell>
                       )}
-                      
+
                       {isFullData && (
                         <TableCell>
                           <div>
@@ -480,7 +488,7 @@ const ReviewsPage = () => {
                           </div>
                         </TableCell>
                       )}
-                      
+
                       <TableCell>
                         <div className="flex flex-col gap-1">
                           {renderStars(review.rating)}
@@ -509,7 +517,7 @@ const ReviewsPage = () => {
                           <span className="text-gray-400 italic text-sm">ไม่มีความคิดเห็น</span>
                         )}
                       </TableCell>
-                      
+
                       {isFullData && (
                         <TableCell>
                           <span className={`inline-block px-2 py-1 text-xs rounded ${review.is_spam
@@ -520,7 +528,7 @@ const ReviewsPage = () => {
                           </span>
                         </TableCell>
                       )}
-                      
+
                       <TableCell className="text-sm text-gray-500">
                         {formatDate(review.created_at)}
                       </TableCell>

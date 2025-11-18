@@ -14,12 +14,12 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   useSidebar,
-} from "./Sidebar"
+} from "../ui/sidebar"
 import { Link, useNavigate } from "react-router-dom";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./Dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./dropdown-menu";
 import { AlertCircle, BarChart2, ChevronDown, ChevronRight, ChevronUp, CreditCard, FileText, LayoutDashboard, User, User2 } from "lucide-react";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./Collapsible";
-import { Button } from "@/components/Admin_components/ui/Button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./collapsible";
+import { Button } from "@/components/Admin_components/ui/button";
 
 
 // const menuItems = [
@@ -50,6 +50,15 @@ const navData = [
       { label: 'จัดการรีวิว', link: '/admin/reviews' },
     ]
   },
+  // {
+  //   icon: <CreditCard />,
+  //   label: 'ติดตามปัญหา / ข้อร้องเรียน',
+  //   menuName: 'disputes',
+  //   children: [
+  //     { label: 'รายการข้อร้องเรียน', link: '/admin/disputes' },
+  //     { label: 'ระบบซัพพอร์ต', link: '/admin/support' },
+  //   ]
+  // },
   {
     icon: <User />,
     label: 'หมวดหมู่',
@@ -66,6 +75,15 @@ const navData = [
       { label: 'จัดการผู้ใช้งาน', link: '/admin/users/' },
     ]
   },
+  {
+    icon: <User />,
+    label: 'หน้าหลัก',
+    menuName: 'users',
+    children: [
+      { label: 'หน้าประกาศ', link: '/marketplace' },
+      { label: 'หน้าแรกของเว็บไซต์', link: '/' },
+    ]
+  },
 ];
 
 
@@ -76,7 +94,7 @@ export function AppSidebar({ role, setToken, setRole, setUserData }) {
   const handleLogout = () => {
     // ล้างข้อมูลใน localStorage
     localStorage.removeItem("token");
-    localStorage.removeItem("role");
+    localStorage.removeItem("user_role");
     localStorage.removeItem("userData");
 
     navigate("/");

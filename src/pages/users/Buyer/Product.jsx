@@ -13,9 +13,9 @@ import ProductDetails from "@/components/product/ProductDetails";
 import SafetyTips from "@/components/product/SafetyTips";
 import SellerContactCard from "@/components/product/SellerContactCard";
 import GuestContact from "@/components/product/GuestContact";
-import ProductReviewSection from "@/components/shop/review/ProductReviewSection";
 import { api } from "@/services/api";
 import { useEffect, useState } from "react";
+import ProductReviewSection from "@/components/shop/review/ProductReviewSection";
 
 function Product() {
     const { productID } = useParams();
@@ -45,32 +45,30 @@ function Product() {
 
         fetchUserId();
     }, []);
+
     if (isLoading) return <LoadingState />;
     if (error || !product) return <ErrorState error={error} onBack={() => navigate("/marketplace")} />;
 
+    // const priceText = typeof product.price === "number"
+    //     ? `฿ ${product.price.toLocaleString()}`
+    //     : product.price || "—";
     const priceText = typeof product.price === "number"
-        ? `฿ ${product.price.toLocaleString()}`
-        : product.price || "—";
+        ? product.price
+        : Number(product.price) || null;
 
-    console.log(product, "sadsa");
-
-
+    console.log(priceText);
 
 
     return (
         <div className="bg-gray-50">
-            <Navbar role="buyer" />
+            <Navbar role={localStorage.getItem('user_role')} />
             <div className="max-w-5xl mx-auto px-6 py-10">
                 <h1 className="text-2xl font-bold mb-6">รายละเอียดสินค้า</h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="md:col-span-2 bg-white rounded-xl shadow p-6">
                         <ProductImageGallery images={product.images} />
-                        <ProductDetails
-                            product={product}
-                            priceText={priceText}
-                            refetch={refetch}
-                        />
+                        <ProductDetails product={product} priceText={priceText} refetch={refetch} />
                         <GuestContact product={product} />
                         <SafetyTips />
                     </div>

@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { AlertCircle, CheckCircle } from "lucide-react"
-import { Button } from "@/components/Admin_components/ui/Button"
-import { Input } from "@/components/Admin_components/ui/Input"
-import { Label } from "@/components/Admin_components/ui/Label"
-import { Textarea } from "@/components/Admin_components/ui/Textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/Admin_components/ui/Select"
-import { Alert, AlertDescription } from "@/components/Admin_components/ui/Alert"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/Admin_components/ui/Card"
+import { Button } from "@/components/Admin_components/ui/button"
+import { Input } from "@/components/Admin_components/ui/input"
+import { Label } from "@/components/Admin_components/ui/label"
+import { Textarea } from "@/components/Admin_components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/Admin_components/ui/select"
+import { Alert, AlertDescription } from "@/components/Admin_components/ui/alert"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/Admin_components/ui/card"
 import { ImageUploadDropzone } from "@/components/image-upload-dropzone"
 import { thaiProvinces } from "@/lib/utils"
 import { api } from "@/services/api"
-import Navbar from "@/components/Navbar"
 
 const CreateListingForm = () => {
     const {
@@ -113,7 +112,7 @@ const CreateListingForm = () => {
                 categoryId: Number.parseInt(data.categoryId),
                 title: data.title,
                 description: data.description || "",
-                price: Number.parseFloat(data.price),
+                price: Number(data.price),
                 location: data.location,
                 images: uploadedImages,
                 phone: data.phone,
@@ -127,7 +126,7 @@ const CreateListingForm = () => {
             })
 
             console.log(listingData);
-
+            
 
             if (response.data.success) {
                 setSubmitStatus({
@@ -150,14 +149,9 @@ const CreateListingForm = () => {
         }
     }
 
-    const role = localStorage.getItem('user_role')
-
     return (
-        <div className="w-full">
-            <nav className="mb-4">
-                <Navbar role={role} />
-            </nav>
-            <Card className="max-w-7xl mx-auto px-4">
+        <div className="w-full max-w-4xl mx-auto p-6">
+            <Card>
                 <CardHeader>
                     <CardTitle className="text-2xl">สร้างประกาศขายสินค้า</CardTitle>
                     <CardDescription>กรอกข้อมูลสินค้าของคุณให้ครบถ้วน</CardDescription>
@@ -172,7 +166,7 @@ const CreateListingForm = () => {
                             <Input
                                 id="title"
                                 type="text"
-                                placeholder="ของสินค้า เช่น Iphone X 64GB สภาพเหมือนใหม่"
+                                placeholder="ของสินค้า เช่น โตโบพิ X 64GB สภาพเหมือนใหม่"
                                 {...register("title", {
                                     required: "กรุณาระบุหัวข้อสินค้า",
                                     minLength: {
@@ -323,7 +317,7 @@ const CreateListingForm = () => {
                         </div>
 
                         {/* เบอร์โทรศัพท์ */}
-                        <div className="space-y-2">
+                        {/* <div className="space-y-2">
                             <Label htmlFor="phone">
                                 เบอร์โทรศัพท์ติดต่อ <span className="text-red-500">*</span>
                             </Label>
@@ -342,7 +336,7 @@ const CreateListingForm = () => {
                             />
                             {errors.phone && <p className="text-sm text-red-500">{errors.phone.message}</p>}
                             <p className="text-xs text-muted-foreground">กรุณาใส่เบอร์โทรที่สามารถติดต่อได้ เพื่อความสะดวกในการซื้อขาย</p>
-                        </div>
+                        </div> */}
 
                         {/* ข้อความเงื่อนไข */}
                         <div className="text-center text-sm text-muted-foreground border-t pt-4">

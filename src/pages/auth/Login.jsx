@@ -33,10 +33,12 @@ function Login({ onSwitch, onSuccess, setToken, setUsers }) {
 
       if (onSuccess) {
         toast.success(response.data.message)
+        // alert(response.data.message);
         onSuccess();
       }
     } catch (error) {
-      console.error("Login failed:", error.response?.data.success === false || error.response?.data.message);
+      console.error("Login failed:", error.response?.data || error.message);
+      // alert(error.response?.data?. || "Login failed!");
       toast.error(error.response?.data.message)
     }
   };

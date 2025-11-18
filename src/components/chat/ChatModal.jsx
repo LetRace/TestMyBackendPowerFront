@@ -13,13 +13,12 @@ const ChatModal = ({
     onClose,
     onSelectConversation,
     onInputChange,
-    onSendMessage,
-    fetchConversations
+    onSendMessage
 }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-[49] flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl h-[600px] flex overflow-hidden">
                 {/* Conversations List - เพิ่ม currentUserId prop */}
                 {/* เพิ่ม prop นี้ */}
@@ -41,7 +40,6 @@ const ChatModal = ({
                         setInput={onInputChange}
                         onSendMessage={onSendMessage}
                         currentUserId={currentUserId}
-                        fetchConversations={fetchConversations}
                     />
                 </div>
             </div>

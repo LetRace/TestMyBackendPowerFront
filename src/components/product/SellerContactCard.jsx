@@ -10,7 +10,6 @@ import { api } from "@/services/api";
 import { useChat } from "@/hooks/useChat";
 import ChatModal from "../chat/ChatModal";
 import { useState } from "react";
-import { toast } from "sonner";
 
 export default function SellerContactCard({ product, copyToClipboard, copied }) {
     // ข้อมูลผู้ขายที่จะแสดงในการ์ด
@@ -19,8 +18,7 @@ export default function SellerContactCard({ product, copyToClipboard, copied }) 
         location: product.location || "—",
         sellerName: product.seller_first_name || product.seller_username || "ผู้ขาย",
         sellerUsername: product.seller_username || "—",
-        sellerRating: Number(product.seller_rating) || 0,
-
+        sellerRating: product.seller_rating || 0,
     };
 
     const token = localStorage.getItem("token");
@@ -58,10 +56,10 @@ export default function SellerContactCard({ product, copyToClipboard, copied }) 
         try {
             // ขั้นตอนที่ 1: ดึงรายการแชททั้งหมดของผู้ใช้
             const conversationsResponse = await api.get(
-                "/conversations",
+                "https://testmybackendpower.onrender.com/api/v1/conversations",
                 {
-                    headers: {
-                        Authorization: `Bearer ${token}`
+                    headers: { 
+                        Authorization: `Bearer ${token}` 
                     },
                 }
             );
@@ -79,13 +77,13 @@ export default function SellerContactCard({ product, copyToClipboard, copied }) 
             // ถ้าพบแชทที่มีอยู่แล้ว
             if (existingConversation) {
                 console.log("🟢 พบแชทที่มีอยู่แล้ว:", existingConversation);
-
+                
                 // รอให้ fetchConversations ทำงานเสร็จก่อน
                 await fetchConversations();
-
+                
                 // เปิด modal แชทโดยไม่ต้องสร้างใหม่
                 setShowChat(true);
-
+                
                 // เลือก conversation ที่พบ พร้อมโหลดข้อความ
                 handleConversationSelect(existingConversation);
                 return;
@@ -93,15 +91,15 @@ export default function SellerContactCard({ product, copyToClipboard, copied }) 
 
             // ขั้นตอนที่ 3: ถ้าไม่พบแชท ให้สร้างแชทใหม่
             console.log("🔵 กำลังสร้างแชทใหม่สำหรับ listing_id:", product.listing_id);
-
+            
             const createConversationResponse = await api.post(
-                "/conversations",
-                {
-                    listingId: product.listing_id
+                "https://testmybackendpower.onrender.com/api/v1/conversations",
+                { 
+                    listingId: product.listing_id 
                 },
                 {
-                    headers: {
-                        Authorization: `Bearer ${token}`
+                    headers: { 
+                        Authorization: `Bearer ${token}` 
                     },
                 }
             );
@@ -111,17 +109,17 @@ export default function SellerContactCard({ product, copyToClipboard, copied }) 
             // ขั้นตอนที่ 4: ดึงข้อมูล conversations ทั้งหมดอีกครั้ง
             // เพื่อให้ได้ข้อมูลครบถ้วน (listing_title, thumbnail, ฯลฯ)
             const updatedConversationsResponse = await api.get(
-                "/conversations",
+                "https://testmybackendpower.onrender.com/api/v1/conversations",
                 {
-                    headers: {
-                        Authorization: `Bearer ${token}`
+                    headers: { 
+                        Authorization: `Bearer ${token}` 
                     },
                 }
             );
 
             const updatedConversations = updatedConversationsResponse.data?.data || [];
             console.log("🔄 ข้อมูลแชทที่อัพเดทแล้ว:", updatedConversations);
-
+            
             // หา conversation ที่เพิ่งสร้าง
             const newlyCreatedConversation = updatedConversations.find(
                 (conversation) => {
@@ -132,24 +130,24 @@ export default function SellerContactCard({ product, copyToClipboard, copied }) 
             // ขั้นตอนที่ 5: เปิด modal และเลือก conversation
             if (newlyCreatedConversation) {
                 console.log("✅ พบข้อมูลแชทที่สร้างใหม่:", newlyCreatedConversation);
-
+                
                 // รอให้ fetchConversations ทำงานเสร็จก่อน เพื่อ refresh ข้อมูลใน hook
                 await fetchConversations();
-
+                
                 // เปิด modal แชท
                 setShowChat(true);
-
+                
                 // เลือก conversation พร้อมโหลดข้อความ
                 handleConversationSelect(newlyCreatedConversation);
-
-                toast.success("สร้างแชทสำเร็จ!");
+                
+                alert("✅ สร้างแชทสำเร็จ!");
             } else {
                 // กรณีที่ไม่พบข้อมูล (ไม่น่าจะเกิด)
                 console.warn("⚠️ ไม่พบข้อมูลแชทที่เพิ่งสร้าง");
-
+                
                 // ลองใช้ข้อมูลจาก response ตอน create
                 setShowChat(true);
-
+                
                 // สร้าง conversation object พื้นฐาน
                 const basicConversation = {
                     conversation_id: createConversationResponse.data?.data?.conversation_id,
@@ -158,20 +156,19 @@ export default function SellerContactCard({ product, copyToClipboard, copied }) 
                     listing_price: product.price || "0",
                     listing_thumbnail: product.thumbnail_url || "",
                 };
-
+                
                 handleConversationSelect(basicConversation);
-                toast.success("✅ สร้างแชทสำเร็จ!");
+                alert("✅ สร้างแชทสำเร็จ!");
             }
 
         } catch (error) {
             console.error("❌ เกิดข้อผิดพลาดในการสร้างหรือเปิดแชท:", error);
-
+            
             // แสดงข้อความ error ที่ชัดเจน
             if (error.response) {
-                toast.error(`ไม่สามารถสร้างแชทได้: ${error.response.data?.message || "เกิดข้อผิดพลาด"}`)
-                // alert(`❌ ไม่สามารถสร้างแชทได้: ${error.response.data?.message || "เกิดข้อผิดพลาด"}`);
+                alert(`❌ ไม่สามารถสร้างแชทได้: ${error.response.data?.message || "เกิดข้อผิดพลาด"}`);
             } else {
-                toast.error("❌ ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้");
+                alert("❌ ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้");
             }
         } finally {
             setIsCreatingConversation(false);
@@ -180,10 +177,10 @@ export default function SellerContactCard({ product, copyToClipboard, copied }) 
 
     // ตรวจสอบว่าผู้ขายมีข้อมูลติดต่อหรือไม่
     const hasSellerContactInfo = hasContactInfo(contactInfo);
-
+    
     // ตรวจสอบว่ามีเบอร์โทรศัพท์หรือไม่
     const hasPhoneNumber = contactInfo.phone !== "—";
-
+    
     // ตรวจสอบว่าเป็นผู้ซื้อหรือผู้ขาย
     const canUseChat = userRole === "buyer" || userRole === "seller";
 
@@ -196,22 +193,26 @@ export default function SellerContactCard({ product, copyToClipboard, copied }) 
                     <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center text-white font-bold">
                         {contactInfo.sellerName.charAt(0).toUpperCase()}
                     </div>
-
-                    {/* ข้อมูลผู้ขาย */}
-                    <div>
+                    
+                
+                   {/* ข้อมูลผู้ขาย */}
+                        <div>
                         <p>ลงขายโดย</p>
                         <p className="font-semibold">
                             {contactInfo.sellerName}-{product.seller_last_name}
                         </p>
                         <p className="text-xs text-gray-500">
                             @{contactInfo.sellerUsername}
-                            {contactInfo.sellerRating > 0 && (
+
+                            {/* ⭐ แสดงเรตติ้งแบบปลอดภัย */}
+                            {parseFloat(contactInfo.sellerRating) > 0 && (
                                 <span className="ml-2">
-                                    ⭐ {contactInfo.sellerRating.toFixed(1)}
+                                    ⭐ {parseFloat(contactInfo.sellerRating).toFixed(1)}
                                 </span>
                             )}
                         </p>
                     </div>
+
                 </div>
             </Link>
 
@@ -234,7 +235,7 @@ export default function SellerContactCard({ product, copyToClipboard, copied }) 
                         {hasPhoneNumber === true && (
                             <>
                                 <h3>ติดต่อผู้ขาย</h3>
-
+                                
                                 {/* แสดงเบอร์โทรศัพท์ */}
                                 <ContactItem
                                     label="เบอร์โทร"

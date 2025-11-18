@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { useForm } from "react-hook-form"
-import { Card } from "@/components/Admin_components/ui/Card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/Admin_components/ui/Avatar"
-import { Button } from "@/components/Admin_components/ui/Button"
-import { Badge } from "@/components/Admin_components/ui/Badge"
+import { Card } from "@/components/Admin_components/ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/Admin_components/ui/avatar"
+import { Button } from "@/components/Admin_components/ui/button"
+import { Badge } from "@/components/Admin_components/ui/badge"
 import {
     Dialog,
     DialogClose,
@@ -14,9 +14,9 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/Admin_components/ui/Dialog"
-import { Input } from "@/components/Admin_components/ui/Input"
-import { Label } from "@/components/Admin_components/ui/Label"
+} from "@/components/Admin_components/ui/dialog"
+import { Input } from "@/components/Admin_components/ui/input"
+import { Label } from "@/components/Admin_components/ui/label"
 
 const API_URL = "https://your-api-url.com/api/profile" // เปลี่ยนเป็น API จริงของคุณ
 

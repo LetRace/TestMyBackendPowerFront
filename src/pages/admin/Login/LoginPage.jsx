@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { Lock, Mail } from 'lucide-react';
-import { Button } from '@components/ui/Button';
-import { Input } from '@components/ui/Input';
-import { Card, CardContent, CardHeader, CardTitle } from '@components/ui/Card';
-import authService from '@services/authService';
-import { authUtils } from '@lib/auth';
+import { Button } from '../../components/ui/Button';
+import { Input } from '../../components/ui/Input';
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/Card';
+import authService from '../../services/authService';
+import { authUtils } from '../../lib/auth';
 
 const LoginPage = () => {
   const navigate = useNavigate();

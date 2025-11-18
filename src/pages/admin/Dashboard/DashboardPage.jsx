@@ -1,6 +1,6 @@
 import React from 'react';
 import { Users, Package, Flag, Star } from 'lucide-react';
-import { Card, CardContent } from '@/components/Admin_components/ui/Card';
+import { Card, CardContent } from '@/components/Admin_components/ui/card';
 
 export const StatCard = ({ title, value, icon: Icon, color }) => (
   <Card>

@@ -11,8 +11,7 @@ const ChatWindow = ({
     input,
     setInput,
     onSendMessage,
-    currentUserId,
-    fetchConversations
+    currentUserId
 }) => {
     const groupedMessages = useChatMessages(messages, currentUserId, selectedConversation);
 
@@ -30,10 +29,9 @@ const ChatWindow = ({
     return (
         <>
             {/* Chat Header - เพิ่ม currentUserId prop */}
-            <ChatHeader
-                conversation={selectedConversation}
-                currentUserId={currentUserId}
-                fetchConversations={fetchConversations}
+            <ChatHeader 
+                conversation={selectedConversation} 
+                currentUserId={currentUserId} 
             />
 
             {/* Messages */}

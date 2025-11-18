@@ -8,11 +8,11 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '@/components/Admin_components/ui/Dialog';
-import { Input } from '@/components/Admin_components/ui/Input';
-import { Button } from '@/components/Admin_components/ui/Button';
-import { Label } from '@/components/Admin_components/ui/Label';
-import { Textarea } from '@/components/Admin_components/ui/Textarea';
+} from '@/components/Admin_components/ui/dialog';
+import { Input } from '@/components/Admin_components/ui/input';
+import { Button } from '@/components/Admin_components/ui/button';
+import { Label } from '@/components/Admin_components/ui/label';
+import { Textarea } from '@/components/Admin_components/ui/textarea';
 import { ImageUploadDropzone } from '@/components/image-upload-dropzone';
 
 const ListingFormModal = ({
@@ -35,6 +35,9 @@ const ListingFormModal = ({
     expiresAt: '',
     images: [],
   });
+
+  console.log(categories, "cat data");
+  
 
   // ✅ เพิ่ม state สำหรับรูปที่อัปโหลดผ่าน UploadThing
   const [uploadedImages, setUploadedImages] = useState([]);
@@ -188,7 +191,7 @@ const ListingFormModal = ({
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Category */}
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <Label htmlFor="category">หมวดหมู่</Label>
             <select
               id="category"
@@ -203,7 +206,7 @@ const ListingFormModal = ({
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
 
           {/* Title */}
           <div className="space-y-2">
@@ -257,7 +260,7 @@ const ListingFormModal = ({
           </div>
 
           {/* Coordinates */}
-          <div className="grid grid-cols-2 gap-4">
+          {/* <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="locationLat">ละติจูด</Label>
               <Input
@@ -280,10 +283,10 @@ const ListingFormModal = ({
                 step="any"
               />
             </div>
-          </div>
+          </div> */}
 
           {/* Expires At */}
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <Label htmlFor="expiresAt">วันหมดอายุ</Label>
             <Input
               id="expiresAt"
@@ -291,7 +294,7 @@ const ListingFormModal = ({
               value={formData.expiresAt}
               onChange={(e) => handleChange('expiresAt', e.target.value)}
             />
-          </div>
+          </div> */}
 
           {/* Images - ✅ แสดงทั้งสองแบบ */}
           <div className="space-y-4">

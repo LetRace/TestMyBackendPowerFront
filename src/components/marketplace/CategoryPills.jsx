@@ -1,7 +1,6 @@
 import { FiFilter, FiChevronDown } from "react-icons/fi";
 
 const CategoryPills = ({ categories, selectedCategory, onCategoryChange, sort, onSortChange }) => {
-
     return (
         <div className="flex flex-wrap items-center justify-between gap-4 mt-4">
             {/* Categories Pills */}
@@ -11,8 +10,8 @@ const CategoryPills = ({ categories, selectedCategory, onCategoryChange, sort, o
                         key={c.category_id}
                         onClick={() => onCategoryChange(c)}
                         className={`px-3 py-1.5 rounded-full text-sm border ${selectedCategory === c.slug
-                            ? "bg-blue-600 text-white border-blue-600"
-                            : "bg-white hover:bg-gray-50"
+                                ? "bg-blue-600 text-white border-blue-600"
+                                : "bg-white hover:bg-gray-50"
                             }`}
                     >
                         {c.icon && <span className="mr-1">{c.icon}</span>}

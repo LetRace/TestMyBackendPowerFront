@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { toast } from 'sonner';
-import { Card, CardContent, CardHeader } from '@/components/Admin_components/ui/Card';
-import { Input } from '@/components/Admin_components/ui/Input';
-import { Button } from '@/components/Admin_components/ui/Button';
-import { Badge } from '@/components/Admin_components/ui/Badge';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/Admin_components/ui/Table';
+import { Card, CardContent, CardHeader } from '@/components/Admin_components/ui/card';
+import { Input } from '@/components/Admin_components/ui/input';
+import { Button } from '@/components/Admin_components/ui/button';
+import { Badge } from '@/components/Admin_components/ui/badge';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/Admin_components/ui/table';
 import { Loading } from '@/components/Admin_components/Loading';
 import { EmptyState } from '@/components/Admin_components/EmptyState';
 import {
@@ -14,7 +14,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/Admin_components/ui/Select"
+} from "@/components/Admin_components/ui/select"
 
 import { getRoleColor, getRoleDisplayName, getStatusColor, getStatusDisplayName } from '@/lib/utils';
 import { api } from '@/services/api';

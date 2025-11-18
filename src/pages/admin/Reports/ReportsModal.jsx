@@ -5,7 +5,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/Admin_components/ui/Dialog"
+} from "@/components/Admin_components/ui/dialog"
 
 const ReportsModal = ({
     report,

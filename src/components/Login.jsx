@@ -21,7 +21,8 @@ const Login = () => {
       }
     } catch (error) {
       console.error('Login error:', error)
-      alert('เกิดข้อผิดพลาดในการเข้าสู่ระบบ')
+      toast.error(error.response?.data.message)
+      // alert('เกิดข้อผิดพลาดในการเข้าสู่ระบบ')
     }
   }
 

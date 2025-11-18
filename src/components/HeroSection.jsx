@@ -14,8 +14,6 @@ function HeroSection({ onAuthClick }) {
     navigate("/");
   };
 
-  const token = localStorage.getItem('token')
-
   return (
     <section className="relative bg-gradient-to-b from-[#1e3c72] to-[#2a5298] text-white">
       <div className="max-w-7xl mx-auto px-6 pt-6">
@@ -29,17 +27,16 @@ function HeroSection({ onAuthClick }) {
             className="flex items-center gap-3 cursor-pointer"
             onClick={handleLogoClick}
           >
-            <span className="text-xl font-bold tracking-wide">TrustTrade</span>
+            <span className="text-xl font-bold tracking-wide">SafeTrade</span>
           </div>
 
-          {token ? null : (
-            <button
-              onClick={onAuthClick}
-              className="bg-white text-blue-700 px-6 py-2 rounded-full shadow hover:scale-110 hover:shadow-xl transition text-sm font-semibold"
-            >
-              Signup / Login
-            </button>
-          )}
+          {/* Auth Button */}
+          <button
+            onClick={onAuthClick}
+            className="bg-white text-blue-700 px-6 py-2 rounded-full shadow hover:scale-110 hover:shadow-xl transition text-sm font-semibold"
+          >
+            Signup / Login
+          </button>
         </div>
 
         {/* Hero Content */}
@@ -60,7 +57,7 @@ function HeroSection({ onAuthClick }) {
           <div className="flex justify-end" data-aos="zoom-in">
             <img
               src={mascot}
-              alt="TrustTrade Mascot"
+              alt="SafeTrade Mascot"
               className="max-h-[320px] object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.45)] translate-y-2"
             />
           </div>

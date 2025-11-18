@@ -22,8 +22,10 @@ import Pagination from "@/components/marketplace/Pagination";
 import banner1 from "@/assets/banner1.png";
 import banner2 from "@/assets/banner2.png";
 import banner3 from "@/assets/banner3.png";
+import { useNavigate } from "react-router-dom";
+import AuthModal from "@/components/AuthModal";
 
-function Marketplace({ token, setToken, setRole, setUsers, }) {
+function Marketplace({ setToken, user, setUsers, setRole, role }) {
   // ===== State =====
   const [sort, setSort] = useState("newest");
   const [pagination, setPagination] = useState({
@@ -109,14 +111,8 @@ function Marketplace({ token, setToken, setRole, setUsers, }) {
   // ===== Computed Values =====
   const { currentCategory, parentCategory } = useMemo(() => {
     if (filter.category === "all") {
-      return {
-        currentCategory: categories[0],
-        parentCategory: null
-      };
+      return { currentCategory: categories[0], parentCategory: null };
     }
-
-    console.log('asd', filter.category);
-    
 
     // ค้นหาใน main categories
     let found = categories.find((cat) => cat.slug === filter.category);
@@ -144,11 +140,43 @@ function Marketplace({ token, setToken, setRole, setUsers, }) {
   const user_role = localStorage.getItem("user_role");
 
 
+  const navigate = useNavigate();
+
+  // สถานะสำหรับ Auth Modal (null = ปิด, "login" = เปิด)
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  /**
+   * Handle เมื่อคลิกปุ่ม Signup/Login
+   */
+  const handleAuthButtonClick = () => {
+    setIsAuthModalOpen(true);
+  };
+
+  /**
+   * Handle เมื่อปิด Auth Modal
+   */
+  const handleCloseAuthModal = () => {
+    setIsAuthModalOpen(false);
+  };
+
+  /**
+   * Handle เมื่อ authentication สำเร็จ
+   * นำทางไปยังหน้า marketplace
+   */
+  const handleAuthSuccess = (authenticatedUser, mode) => {
+    setIsAuthModalOpen(false);
+
+    if (mode === "login") {
+      navigate("/marketplace");   // login แล้วค่อยพาไป
+    }
+    // ถ้า mode === "signup" ก็ไม่ต้อง navigate → อยู่หน้า Landing
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar token={token} setToken={setToken} setRole={setRole} setUsers={setUsers} role={user_role} />
+      <Navbar role={user_role} handleAuthButtonClick={handleAuthButtonClick} />
 
-      <div className="max-w-7xl mx-auto px-4 py-6">
+      <div className="max-w-6xl mx-auto px-6 py-6">
         {/* Breadcrumb */}
         <Breadcrumb
           parentCategory={parentCategory}
@@ -207,6 +235,15 @@ function Marketplace({ token, setToken, setRole, setUsers, }) {
             {/* Pagination */}
             <Pagination pagination={pagination} onPageChange={handlePageChange} />
           </main>
+          {/* Auth Modal - modal สำหรับ login/signup */}
+          <AuthModal
+            isOpen={isAuthModalOpen}
+            onClose={handleCloseAuthModal}
+            onAuthSuccess={handleAuthSuccess}
+            setToken={setToken}
+            setUsers={setUsers}
+            setRole={setRole}
+          />
         </div>
       </div>
     </div>

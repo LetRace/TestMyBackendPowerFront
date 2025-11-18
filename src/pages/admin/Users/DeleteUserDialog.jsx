@@ -10,7 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/Admin_components/ui/alert-dialog"
-import { Button } from "@/components/Admin_components/ui/Button"
+import { Button } from "@/components/Admin_components/ui/button"
 import { Trash2 } from "lucide-react"
 import { api } from "@/services/api"
 import { toast } from "sonner"

@@ -15,6 +15,7 @@ import HeroSection from "@/components/HeroSection.jsx";
 import LatestListingsSection from "@/components/LatestListingsSection.jsx";
 import FooterCategories from "@/components/FooterCategories.jsx";
 import AuthModal from "@/components/AuthModal.jsx";
+import AdsenseAd from "@/components/AdsenseAd.jsx";
 
 /**
  * Landing Page Component
@@ -77,15 +78,60 @@ function Landing({ setToken, user, setUsers, setRole, role }) {
    * Handle เมื่อ authentication สำเร็จ
    * นำทางไปยังหน้า marketplace
    */
-  const handleAuthSuccess = (authenticatedUser) => {
-    setIsAuthModalOpen(false);
-    navigate("/marketplace");
+  const handleAuthSuccess = (authenticatedUser, mode) => {
+  setIsAuthModalOpen(false);
+
+  if (mode === "login") {
+    navigate("/marketplace");   // login แล้วค่อยพาไป
+  }
+  // ถ้า mode === "signup" ก็ไม่ต้อง navigate → อยู่หน้า Landing
+};
+
+
+  /**
+   * Handle เมื่อคลิกที่หมวดหมู่ย่อย
+   * ดึงข้อมูลหมวดหมู่และนำทางไปยังหน้าหมวดหมู่นั้น
+   */
+  const handleSubcategoryClick = async (slug) => {
+    // ดึงข้อมูลหมวดหมู่จาก API
+    const categoryData = await fetchCategoryBySlug(slug);
+
+    if (categoryData) {
+      console.log("✅ Category data loaded:", categoryData);
+
+      // นำทางไปยังหน้าหมวดหมู่พร้อมส่งข้อมูลไปด้วย
+      navigate(`/category/${slug}`, {
+        state: { category: categoryData },
+      });
+    } else {
+      // แสดงข้อความเตือนถ้าไม่พบหมวดหมู่
+      alert("ไม่พบหมวดหมู่หรือเกิดข้อผิดพลาด");
+    }
   };
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-gray-50s">
       {/* Hero Section - ส่วนแสดงหัวข้อหลักและปุ่ม auth */}
       <HeroSection onAuthClick={handleAuthButtonClick} />
+
+      {/* โฆษณาใต้ Hero Section */}
+      <section aria-label="sponsored" className="-mt-6 pb-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="rounded-2xl border border-slate-200 bg-white shadow-md overflow-hidden">
+            <div className="px-4 py-2 text-[11px] uppercase tracking-wide text-slate-500/80">โฆษณา</div>
+            <div className="px-2 pb-4">
+              <AdsenseAd
+                client="ca-pub-1824806465207098"   // เอาจากรูปที่ AdSense ให้
+                 slot="9876543210"                 // ตอนนี้จะใช้ slot mock ก็ได้ หรือเอาจาก AdSense ก็ได้
+                className="w-full"
+                style={{ display: "block", minHeight: 90 }}
+                format="auto"
+              />
+
+            </div>
+          </div>
+        </div>
+      </section>
 
       <LatestListingsSection
         listings={latestListings}
@@ -97,6 +143,7 @@ function Landing({ setToken, user, setUsers, setRole, role }) {
         categories={categories}
         isLoading={isLoadingCategories}
         error={categoriesError}
+        onSubcategoryClick={handleSubcategoryClick}
       />
 
       {/* Auth Modal - modal สำหรับ login/signup */}
@@ -108,7 +155,6 @@ function Landing({ setToken, user, setUsers, setRole, role }) {
         setUsers={setUsers}
         setRole={setRole}
       />
-
     </div>
   );
 }

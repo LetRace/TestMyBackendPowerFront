@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import { api } from "@/services/api";
 import { Edit, LogOut } from "lucide-react";
 import { ImageUploadDropzone } from "./image-upload-dropzone";
-import { formatDate } from "@/lib/utils";
 
 function Profile({ user, setUsers }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -32,14 +31,50 @@ function Profile({ user, setUsers }) {
       try {
         const parsed = JSON.parse(storedData);
         const userData = parsed.user || parsed;
-        setForm(userData);
+
+        // Normalize null values to empty strings for form inputs
+        const normalizedData = {
+          ...userData,
+          phone: userData.phone ?? "",
+          avatar_url: userData.avatar_url ?? "",
+          first_name: userData.first_name ?? "",
+          last_name: userData.last_name ?? "",
+        };
+
+        setForm(normalizedData);
       } catch (err) {
         console.error("Error parsing user data:", err);
       }
     } else if (user) {
-      setForm(user);
+      const normalizedData = {
+        ...user,
+        phone: user.phone ?? "",
+        avatar_url: user.avatar_url ?? "",
+        first_name: user.first_name ?? "",
+        last_name: user.last_name ?? "",
+      };
+      setForm(normalizedData);
     }
   };
+
+  // const initializeUserData = () => {
+  //   const storedData = localStorage.getItem("userData");
+  //   const storedToken = localStorage.getItem("token");
+
+  //   if (storedToken) setToken(storedToken);
+
+  //   if (storedData) {
+  //     try {
+  //       const parsed = JSON.parse(storedData);
+  //       const userData = parsed.user || parsed;
+  //       setForm(userData);
+  //     } catch (err) {
+  //       console.error("Error parsing user data:", err);
+  //     }
+  //   } else if (user) {
+  //     setForm(user);
+  //   }
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,10 +89,8 @@ function Profile({ user, setUsers }) {
       const dataToStore = {
         ...parsed,
         ...updatedUser,
-        user: updatedUser
       };
 
-      if (token) dataToStore.token = token;
       initializeUserData();
       localStorage.setItem("userData", JSON.stringify(dataToStore));
     } catch (err) {
@@ -75,13 +108,10 @@ function Profile({ user, setUsers }) {
       first_name: form.first_name,
       last_name: form.last_name,
       phone: form.phone,
-      newPassword: form.newPassword,
       avatar_url: uploadedImages[0],
     };
 
     try {
-      console.log(token);
-
       if (token) {
         const res = await api.patch("/users/edit-profile", payload, {
           headers: {
@@ -89,7 +119,6 @@ function Profile({ user, setUsers }) {
             "Content-Type": "application/json",
           },
         });
-        
 
         if (res.data?.success && res.data?.user) {
           const updatedUser = res.data.user;
@@ -138,13 +167,13 @@ function Profile({ user, setUsers }) {
     );
   }
 
-  const role = localStorage.getItem('user_role')
+  // แก้จากใส่ url ให้เพิ่มรูปเองโดยใช้ uploadthing
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar role={role} />
+      <Navbar role="buyer" />
 
-      <div className="mx-auto max-w-7xl py-10">
+      <div className="mx-auto px-6 py-10">
         <h1 className="text-2xl font-bold flex items-center gap-2 mb-6">
           ข้อมูลส่วนตัว
         </h1>
@@ -200,8 +229,7 @@ function ProfileView({ form, onEdit, onLogout }) {
           <p className="text-gray-600">ไอดี {form.user_id}</p>
           <p className="text-gray-600">อีเมล์ {form.email}</p>
           <p className="text-gray-600">เบอร์โทร {form.phone || "-"}</p>
-          <p className="text-gray-600">วันที่สร้างบัณชี {formatDate(form.created_at)}</p>
-          <p className="text-gray-600">Role: {form.user_role || form.role || "user"}</p>
+          <p className="text-sm">Role: {form.user_role || form.role || "user"}</p>
         </div>
       </div>
 
@@ -285,15 +313,6 @@ function ProfileEdit({ form, onChange, onSave, onCancel, isLoading, setUploadedI
           value={form.phone || ""}
           onChange={onChange}
           placeholder="Phone"
-          className="w-full border rounded px-3 py-2"
-          disabled={isLoading}
-        />
-        <input
-          type="password"
-          name="newPassword"
-          value={form.newPassword || ""}
-          onChange={onChange}
-          placeholder="เปลี่ยนรหัสผ่าน"
           className="w-full border rounded px-3 py-2"
           disabled={isLoading}
         />

@@ -2,40 +2,13 @@
 import { useState } from "react";
 import { useChat } from "@/hooks/useChat";
 import ChatModal from "./chat/ChatModal";
-import NavbarLogo from "./navbar/NavbarLogo";
-import NavbarLinks from "./navbar/NavbarLinks";
-import NavbarActions from "./navbar/NavbarActions";
-import MobileDrawer from "./navbar/MobileDrawer";
-import AuthModal from "./AuthModal";
+import NavbarLogo from "./Navbar/NavbarLogo";
+import NavbarLinks from "./Navbar/NavbarLinks";
+import NavbarActions from "./Navbar/NavbarActions";
+import MobileDrawer from "./Navbar/MobileDrawer";
 
-function Navbar({ role, setToken, setRole, setUsers }) {
+function Navbar({ role, handleAuthButtonClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-
-
-  /**
-   * Handle เมื่อคลิกปุ่ม Signup/Login
-   */
-  const handleAuthButtonClick = () => {
-    setIsAuthModalOpen(true);
-  };
-
-  /**
-   * Handle เมื่อปิด Auth Modal
-   */
-  const handleCloseAuthModal = () => {
-    setIsAuthModalOpen(false);
-  };
-
-  /**
- * Handle เมื่อ authentication สำเร็จ
- * นำทางไปยังหน้า marketplace
- */
-  const handleAuthSuccess = (authenticatedUser) => {
-    setIsAuthModalOpen(false);
-    navigate("/marketplace");
-  };
 
   const {
     showChat,
@@ -51,7 +24,6 @@ function Navbar({ role, setToken, setRole, setUsers }) {
     handleChatClick,
     handleConversationSelect,
     sendMessage,
-    fetchConversations
   } = useChat(role);
 
   const token = localStorage.getItem('token')
@@ -67,30 +39,24 @@ function Navbar({ role, setToken, setRole, setUsers }) {
             {/* Center: Navigation Links (Desktop) */}
             <NavbarLinks role={role} />
 
-            {token === null ? (
+            {/* Right: Actions */}
+            <NavbarActions
+              role={role}
+              unreadCount={unreadCount}
+              menuOpen={menuOpen}
+              onChatClick={handleChatClick}
+              onMenuToggle={() => setMenuOpen(!menuOpen)}
+            />
+
+            {token ? null : (
               <button
                 onClick={handleAuthButtonClick}
-                className="border-2 border-blue-700 text-blue-700 px-4 py-2 rounded-full shadow hover:scale-110 hover:shadow-xl transition text-sm font-semibold"
+                className="bg-white text-blue-700 px-6 py-2 rounded-full shadow hover:scale-110 hover:shadow-xl transition text-sm font-semibold"
               >
                 Signup / Login
               </button>
-            ) : (
-              <NavbarActions
-                role={role}
-                unreadCount={unreadCount}
-                menuOpen={menuOpen}
-                onChatClick={handleChatClick}
-                onMenuToggle={() => setMenuOpen(!menuOpen)}
-              />
+
             )}
-            <AuthModal
-              isOpen={isAuthModalOpen}
-              onClose={handleCloseAuthModal}
-              onAuthSuccess={handleAuthSuccess}
-              setToken={setToken}
-              setUsers={setUsers}
-              setRole={setRole}
-            />
           </div>
         </div>
       </nav>
@@ -115,7 +81,6 @@ function Navbar({ role, setToken, setRole, setUsers }) {
         onSelectConversation={handleConversationSelect}
         onInputChange={setInput}
         onSendMessage={sendMessage}
-        fetchConversations={fetchConversations}
       />
     </>
   );

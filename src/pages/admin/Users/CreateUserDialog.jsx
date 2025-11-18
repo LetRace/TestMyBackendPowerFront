@@ -6,17 +6,17 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from '@/components/Admin_components/ui/Dialog';
-import { Button } from '@/components/Admin_components/ui/Button';
-import { Input } from '@/components/Admin_components/ui/Input';
-import { Label } from '@/components/Admin_components/ui/Label';
+} from '@/components/Admin_components/ui/dialog';
+import { Button } from '@/components/Admin_components/ui/button';
+import { Input } from '@/components/Admin_components/ui/input';
+import { Label } from '@/components/Admin_components/ui/label';
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '@/components/Admin_components/ui/Select';
+} from '@/components/Admin_components/ui/select';
 import { UserPlus } from 'lucide-react';
 import { api } from '@/services/api';
 
@@ -104,7 +104,7 @@ const CreateUserDialog = ({ onUserCreated }) => {
                     สร้างผู้ใช้งาน
                 </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
+            <DialogContent className="font-lineSeed max-w-md max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
                     <DialogTitle>สร้างผู้ใช้งานใหม่</DialogTitle>
                 </DialogHeader>
@@ -170,7 +170,6 @@ const CreateUserDialog = ({ onUserCreated }) => {
                             required
                         />
                     </div>
-
 
                     <div className="flex justify-end gap-2 pt-4">
                         <Button

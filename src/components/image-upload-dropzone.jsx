@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { generateUploadDropzone } from "@uploadthing/react"
-import { Button } from "@/components/Admin_components/ui/Button"
+import { Button } from "@/components/Admin_components/ui/button"
 import { X, CheckCircle, Upload } from "lucide-react"
-import { Label } from "@/components/Admin_components/ui/Label"
+import { Label } from "@/components/Admin_components/ui/label"
 
 // Generate the UploadDropzone component
 const UploadDropzone = generateUploadDropzone({

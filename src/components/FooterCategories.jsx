@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { getActiveSortedSubcategories } from "../utils/categoryUtils";
 
 /**
@@ -22,11 +21,12 @@ function CategoryColumn({ category, onSubcategoryClick }) {
         {activeSubcategories.length > 0 ? (
           activeSubcategories.map((subcategory) => (
             <li key={subcategory.category_id}>
-              <Link to='/marketplace'
+              <button
+                onClick={() => onSubcategoryClick(subcategory.slug)}
                 className="hover:underline"
               >
                 {subcategory.name}
-              </Link>
+              </button>
             </li>
           ))
         ) : (
@@ -80,9 +80,8 @@ function FooterCategories({
       {/* Footer Bottom - Copyright & Links */}
       <div className="border-t">
         <div className="max-w-7xl mx-auto px-6 py-6 text-xs text-gray-500 flex flex-wrap items-center gap-3 justify-between">
-          <p>© {currentYear} TrustTrade – Marketplace</p>
+          <p>© {currentYear} SafeTrade – Marketplace</p>
           <div className="flex items-center gap-3">
-            <span>ติดต่อแอดมินผ่าน facebook</span>
             <span>นโยบายความเป็นส่วนตัว</span>
             <span>เงื่อนไขการใช้งาน</span>
           </div>

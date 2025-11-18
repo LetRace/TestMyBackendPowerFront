@@ -10,7 +10,7 @@ function NavbarLogo() {
             onClick={() => navigate("/marketplace")}
         >
             <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
-                TrustTrade
+                SafeTrade
             </span>
         </div>
     );

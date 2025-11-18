@@ -1,7 +1,7 @@
 import React from 'react';
 import { Star, ThumbsUp, AlertCircle } from 'lucide-react';
 import { useCreateReview } from '@/hooks/useCreateReview';
-import { toast } from 'sonner';
+// import { toast } from 'sonner';
 
 const CreateReviewForm = ({ listingId, onReviewCreated }) => {
   const {

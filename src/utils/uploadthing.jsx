@@ -2,5 +2,5 @@
 import { generateReactHelpers } from "@uploadthing/react"
 
 export const { useUploadThing, uploadFiles } = generateReactHelpers({
-  url: `https://testmybackendpower.onrender.com/api/uploadthing`,
+  url: "https://testmybackendpower.onrender.com/api/uploadthing",
 })
