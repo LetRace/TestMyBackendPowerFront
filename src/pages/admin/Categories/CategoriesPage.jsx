@@ -8,7 +8,7 @@ import { Badge } from '@/components/Admin_components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/Admin_components/ui/table';
 import { Loading } from '@/components/Admin_components/Loading';
 import { EmptyState } from '@/components/Admin_components/EmptyState';
-import { Modal } from '@/components/Admin_components/ui/modal';
+import { Modal } from '@/components/Admin_components/ui/Modal';
 import { Input } from '@/components/Admin_components/ui/input';
 import { useForm } from 'react-hook-form';
 import { api } from '@/services/api';
