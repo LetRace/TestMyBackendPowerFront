@@ -53,7 +53,7 @@ const ReportsPage = () => {
       })
       console.log(responseStatistics.data?.data);
       console.log(reports.report_id, "reports");
-      
+
       setStats(responseStatistics.data?.data ?? null)
       setReports(response.data?.data ?? null)
     } catch (error) {
@@ -168,6 +168,7 @@ const ReportsPage = () => {
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead>ไอดี</TableHead>
                   <TableHead>ประเภท</TableHead>
                   <TableHead>ผู้รายงาน</TableHead>
                   <TableHead>เหตุผล</TableHead>
@@ -179,6 +180,9 @@ const ReportsPage = () => {
               <TableBody>
                 {reports.map((report) => (
                   <TableRow key={report.report_id}>
+                    <TableCell>
+                      <Badge variant="secondary">{report.report_id}</Badge>
+                    </TableCell>
                     <TableCell>
                       <Badge variant="secondary">{getReportTypeLabel(report.reported_type)}</Badge>
                     </TableCell>
